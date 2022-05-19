@@ -21,11 +21,25 @@ namespace csharp_biblioteca
 
         public List<Documento> SearchByCodice(string sCodice)
         {
-            return this.lsDocumenti.Where(d => d.sCodice == sCodice).ToList();
+            if (sCodice.Length >0)
+            {
+                return lsDocumenti.Where(d => d.sCodice == sCodice).ToList();
+            }
+            else
+            {
+                return lsDocumenti.ToList();
+            }
         }
         public List<Documento> SearchByTitolo(string sTitolo)
         {
-            return this.lsDocumenti.Where(d => d.sTitolo == sTitolo).ToList();
+            if (sTitolo.Length > 0)
+            {
+                return lsDocumenti.Where(d => d.sTitolo == sTitolo).ToList();
+            }
+            else
+            {
+                return lsDocumenti.ToList();
+            }
         }
     }
 }

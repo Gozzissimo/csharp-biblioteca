@@ -76,7 +76,7 @@ namespace csharp_biblioteca
             //-------------------------------
 
             Console.WriteLine("\n\nSearchByCodice: ISBN/DVD\n\n");
-            List<Documento> results = b.SearchByCodice("4187933564631");
+            List<Documento> results = b.SearchByCodice("");  ///INSERIRE QUA IL CODICE DA CERCARE
             foreach (Documento doc in results)
             {
                 Console.WriteLine(doc.ToString());
