@@ -42,6 +42,52 @@ namespace csharp_biblioteca
         static void Main(string[] args)
         {
             Biblioteca b = new Biblioteca("Comunale");
+
+            //STREAMREADER
+
+
+            List<string> list = new List<string>();
+            if (File.Exists("utenti.txt"))
+            {
+                StreamReader sr = new StreamReader("utenti.txt");
+                sr.Close();
+            }
+
+            //STREAMWRITER
+            //Prima di Scrivere, se la lista è vuota, aggiungo qualcosa
+            if (b.lsUtenti.Count() == 0)
+            {
+                Console.WriteLine("Inserisci il tuo Nome");
+                string sNome = Console.ReadLine();
+                Console.WriteLine("Inserisci il tuo Cognome");
+                string sCognome = Console.ReadLine();
+                Console.WriteLine("Inserisci il tuo Numero di Telefono");
+                string sTelefono = Console.ReadLine();
+                Console.WriteLine("Inserisci un'email");
+                string sEmail = Console.ReadLine();
+                Console.WriteLine("Inserisci una password");
+                string sPassword = Console.ReadLine();
+
+                b.lsUtenti.Add(new Utente(sNome, sCognome, sTelefono, sEmail, sPassword));
+            }
+
+            //ora scrivo
+            StreamWriter sw = new StreamWriter("utenti.txt");
+            foreach (Utente utente in b.lsUtenti)
+            {
+                sw.WriteLine(utente);
+            }
+            sw.Close();
+            Environment.Exit(0);
+
+            //Stampa Utenti
+            foreach (var n in b.lsUtenti)
+            {
+                Console.WriteLine(n);
+            }
+
+            //per prima cosa leggo se ci sono utenti nel file UTENTI
+
             Scaffale s1 = new Scaffale("1");
             Scaffale s2 = new Scaffale("2");
             Scaffale s3 = new Scaffale("3");
@@ -76,7 +122,7 @@ namespace csharp_biblioteca
             //-------------------------------
 
             Console.WriteLine("\n\nSearchByCodice: ISBN/DVD\n\n");
-            List<Documento> results = b.SearchByCodice("");  ///INSERIRE QUA IL CODICE DA CERCARE
+            List<Documento> results = b.SearchByCodice("//");  ///INSERIRE QUA IL CODICE DA CERCARE
             foreach (Documento doc in results)
             {
                 Console.WriteLine(doc.ToString());
@@ -92,6 +138,8 @@ namespace csharp_biblioteca
                     }
                 }
             }
+
+            //Come ultima istruzione oppure ogni volta che viene aggiunto un utente, SALVARE GLI UTENTI SU FILE
         }
     }
 }

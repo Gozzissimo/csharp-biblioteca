@@ -15,8 +15,20 @@ namespace csharp_biblioteca
         public Biblioteca(string sNome)
         {
             this.sNome = sNome;
-            this.lsDocumenti = new List<Documento>();
-            this.lsUtenti = new List<Utente>();
+            lsDocumenti = new List<Documento>();
+            lsUtenti = new List<Utente>();
+        }
+
+        //METODI PER AGGIUNGERE E SALVARE UTENTI
+        public bool SaveUtenti(string filename)
+        {
+            //salva gli utenti sul filename
+            return true;
+        }
+        public bool RestoreUtenti(string filename)
+        {
+            //ricostruisce la lista degli utenti leggendo il file su cui sono salvati
+            return false;
         }
 
         public List<Documento> SearchByCodice(string sCodice)
