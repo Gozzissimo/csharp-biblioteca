@@ -41,11 +41,68 @@ namespace csharp_biblioteca
         
         static void Main(string[] args)
         {
+            //GESTIONE FILE DI CONFIGURAZIONE
+            string vPublicEnv = Environment.GetEnvironmentVariable("PUBLIC");
+            if (vPublicEnv != null)
+            {
+                Console.WriteLine("Valore: {0}", vPublicEnv);
+            }
+
+            vPublicEnv += "\\biblioteca";
+            string vFileBiblio = vPublicEnv + "\\biblioteca.txt";
+
+            if (!Directory.Exists(vPublicEnv))
+            {
+                Directory.CreateDirectory(vPublicEnv);
+                Console.WriteLine("Ho creato la directory");
+                if (!File.Exists(vFileBiblio))
+                {
+                    Console.WriteLine("Immetti il percorso file oppure premi invio");
+                    string sFileName = Console.ReadLine();
+                    if (sFileName == "")
+                    {
+                        StreamWriter sw = new StreamWriter(vFileBiblio);
+                        sw.Write("section:fileconfig;" + vFileBiblio);
+                        Console.WriteLine("Ho creato il file");
+                        sw.Close();
+                    }
+                    else
+                    {
+                        StreamWriter sw = new StreamWriter(vFileBiblio);
+                        sw.Write("section:fileconfig;" + sFileName);
+                        Console.WriteLine("Ho creato il file");
+                        sw.Close();
+                    }
+                }
+            }
+            else
+            {
+                if (!File.Exists(vFileBiblio))
+                {
+                    Console.WriteLine("Immetti il percorso file oppure premi invio");
+                    string sFileName = Console.ReadLine();
+                    if (sFileName == "")
+                    {
+                        StreamWriter sw = new StreamWriter(vFileBiblio);
+                        sw.Write("section:fileconfig;" + vFileBiblio);
+                        Console.WriteLine("Ho creato il file");
+                        sw.Close();
+                    }
+                    else
+                    {
+                        StreamWriter sw = new StreamWriter(vFileBiblio);
+                        sw.Write("section:fileconfig;" + sFileName);
+                        Console.WriteLine("Ho creato il file");
+                        sw.Close();
+                    }
+                }
+            }
+
+            ////-----------------------------------------------
+
             Biblioteca b = new Biblioteca("Comunale");
 
             //STREAMREADER
-
-
             List<string> list = new List<string>();
             if (File.Exists("utenti.txt"))
             {
@@ -55,36 +112,36 @@ namespace csharp_biblioteca
 
             //STREAMWRITER
             //Prima di Scrivere, se la lista è vuota, aggiungo qualcosa
-            if (b.lsUtenti.Count() == 0)
-            {
-                Console.WriteLine("Inserisci il tuo Nome");
-                string sNome = Console.ReadLine();
-                Console.WriteLine("Inserisci il tuo Cognome");
-                string sCognome = Console.ReadLine();
-                Console.WriteLine("Inserisci il tuo Numero di Telefono");
-                string sTelefono = Console.ReadLine();
-                Console.WriteLine("Inserisci un'email");
-                string sEmail = Console.ReadLine();
-                Console.WriteLine("Inserisci una password");
-                string sPassword = Console.ReadLine();
+            //if (b.lsUtenti.Count() == 0)
+            //{
+            //    Console.WriteLine("Inserisci il tuo Nome");
+            //    string sNome = Console.ReadLine();
+            //    Console.WriteLine("Inserisci il tuo Cognome");
+            //    string sCognome = Console.ReadLine();
+            //    Console.WriteLine("Inserisci il tuo Numero di Telefono");
+            //    string sTelefono = Console.ReadLine();
+            //    Console.WriteLine("Inserisci un'email");
+            //    string sEmail = Console.ReadLine();
+            //    Console.WriteLine("Inserisci una password");
+            //    string sPassword = Console.ReadLine();
 
-                b.lsUtenti.Add(new Utente(sNome, sCognome, sTelefono, sEmail, sPassword));
-            }
+            //    b.lsUtenti.Add(new Utente(sNome, sCognome, sTelefono, sEmail, sPassword));
+            //}
 
             //ora scrivo
-            StreamWriter sw = new StreamWriter("utenti.txt");
-            foreach (Utente utente in b.lsUtenti)
-            {
-                sw.WriteLine(utente);
-            }
-            sw.Close();
-            Environment.Exit(0);
+            //StreamWriter sw = new StreamWriter("utenti.txt");
+            //foreach (Utente utente in b.lsUtenti)
+            //{
+            //    sw.WriteLine(utente);
+            //}
+            //sw.Close();
+            //Environment.Exit(0);
 
-            //Stampa Utenti
-            foreach (var n in b.lsUtenti)
-            {
-                Console.WriteLine(n);
-            }
+            ////Stampa Utenti
+            //foreach (var n in b.lsUtenti)
+            //{
+            //    Console.WriteLine(n);
+            //}
 
             //per prima cosa leggo se ci sono utenti nel file UTENTI
 
